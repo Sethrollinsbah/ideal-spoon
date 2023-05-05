@@ -1,0 +1,49 @@
+class AutocompleteBasicExample extends StatelessWidget {
+  final dynamic navigate;
+  final dynamic controller;
+  final dynamic button;
+  const AutocompleteBasicExample({Key key,  this.navigate,  this.controller,  this.button});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: getProportionateScreenWidth(300),
+      height: 300,
+      child: Column(
+        children: [
+          Autocomplete<City>(
+            displayStringForOption: (City option) => '${option.nameCity}, ${option. nameCountry}',
+            fieldViewBuilder: (
+              BuildContext context,
+              controller,
+              FocusNode focusNode,
+              VoidCallback onFieldSubmitted,
+            ) {
+              return CupertinoSearchTextField(
+                controller: controller,
+                focusNode: focusNode,
+              );
+            },
+            optionsBuilder: (TextEditingValue textEditingValue) {
+              if (textEditingValue.text == '') {
+                return const Iterable<City>.empty();
+              }
+              return cities.where((City option) {
+                return option
+                    .toString()
+                    .toLowerCase()
+                    .contains(textEditingValue.text.toLowerCase());
+              });
+            },
+            onSelected: navigate
+          ),
+          
+                          Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20),
+                          child: button,
+                          ),
+        ],
+      ),
+    );
+  }
+}
