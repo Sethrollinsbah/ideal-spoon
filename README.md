@@ -9,3 +9,5 @@ List<City> cities = [
 ];
 
 This format makes it easy to access and use the city data in your Dart program, and that it follows a standard naming convention for the properties of each city object.
+
+AutoComplete List Example is a file that shows an example of how to use this list of items.
